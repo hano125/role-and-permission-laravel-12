@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -11,7 +13,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('role.index');
+        $roles = Role::all();
+        return view('Role.index', get_defined_vars());
     }
 
     /**
@@ -19,7 +22,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('role.create');
+        $permissions = Permission::all();
+        return view('Role.create', get_defined_vars());
     }
 
     /**
@@ -27,7 +31,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:roles,name',
+            'permissions' => 'required|array',
+        ]);
+
+        $role = Role::create(['name' => $request->name]);
+        $role->syncPermissions($request->permissions);
+
+        return redirect()->route('roles.index')->with('success', 'Role created successfully.');
     }
 
     /**
@@ -43,7 +55,10 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $roles = Role::findOrFail($id);
+        $permissions = Permission::all();
+        $rolePermissions = $roles->permissions->pluck('name')->toArray();
+        return view('Role.edit', get_defined_vars());
     }
 
     /**
@@ -51,7 +66,15 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $request->validate([
+            'name' => 'required|unique:roles,name,' . $role->id,
+            'permissions' => 'required|array',
+        ]);
+        $role->name = $request->name;
+        $role->save();
+        $role->syncPermissions($request->permissions);
+        return redirect()->route('roles.index')->with('success', 'Role updated successfully.');
     }
 
     /**
@@ -59,6 +82,8 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $role->delete();
+        return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
     }
 }

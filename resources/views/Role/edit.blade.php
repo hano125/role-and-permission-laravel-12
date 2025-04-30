@@ -13,13 +13,14 @@
                         <h5 class="mb-0">Create Role</h5>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('roles.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('roles.update', $roles->id) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT') <!-- Use the PUT method for updates -->
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Role Name</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="basic-default-name"
-                                        placeholder="John Doe" name="name" />
+                                        placeholder="John Doe" name="name" value="{{ $roles->name }}" />
                                 </div>
                             </div>
 
@@ -32,7 +33,8 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
                                                         id="permission-{{ $permission->id }}" name="permissions[]"
-                                                        value="{{ $permission->name }}">
+                                                        value="{{ $permission->name }}"
+                                                        {{ in_array($permission->name, $rolePermissions) ? 'checked' : '' }}>
                                                     <label class="form-check-label" for="permission-{{ $permission->id }}">
                                                         {{ ucfirst($permission->name) }}
                                                     </label>
