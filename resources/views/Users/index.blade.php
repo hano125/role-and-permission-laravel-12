@@ -4,8 +4,8 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4 class="fw-bold py-3 mb-0"><span class="text-muted fw-light">All /</span> Roles</h4>
-            <a href="{{ route('roles.create') }}" class="btn btn-primary">
-                <i class="bx bx-plus-circle me-1"></i> Create new role
+            <a href="{{ route('users.create') }}" type="button" class="btn btn-primary">
+                <i class="bx bx-plus me-1"></i> Add New User
             </a>
         </div>
 

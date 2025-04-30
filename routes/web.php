@@ -20,9 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/role', [RoleController::class, 'index'])->name('role.index')->middleware(['auth']);
-Route::get('/role/create', [RoleController::class, 'create'])->name('role.create')->middleware(['auth']);
-Route::post('/role/store', [RoleController::class, 'store'])->name('role.store')->middleware(['auth']);
+Route::resource('roles', RoleController::class)->middleware(['auth']);
+Route::resource('users', \App\Http\Controllers\usersController::class)->middleware(['auth']);
+
 Route::get('/theme', ThemeController::class)->name('theme')->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
