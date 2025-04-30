@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('role.index')">
+                    <x-nav-link :href="route('roles.index')">
                         Roles
                     </x-nav-link>
 

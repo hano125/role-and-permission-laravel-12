@@ -3,7 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ThemeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/', function () {
@@ -24,5 +26,8 @@ Route::resource('roles', RoleController::class)->middleware(['auth']);
 Route::resource('users', \App\Http\Controllers\usersController::class)->middleware(['auth']);
 
 Route::get('/theme', ThemeController::class)->name('theme')->middleware(['auth']);
-
+// Route::post('logout', function () {
+//     Auth::logout();
+//     return redirect('login');
+// })->name('logout');
 require __DIR__ . '/auth.php';
