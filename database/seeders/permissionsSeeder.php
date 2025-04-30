@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class permissionsSeeder extends Seeder
 {
@@ -12,6 +13,10 @@ class permissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $permissions = ['create user', 'edit user', 'delete user', 'view user',];
+
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
     }
 }
