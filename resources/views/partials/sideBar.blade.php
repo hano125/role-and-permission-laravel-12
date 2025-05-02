@@ -47,17 +47,17 @@
                        </g>
                    </svg>
                </span>
-               <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+               <span class="app-brand-text demo menu-text fw-bolder ms-2">Nacl</span>
            </a>
 
            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-               <i class="bx bx-chevron-left bx-sm align-middle"></i>
+               <i class="align-middle bx bx-chevron-left bx-sm"></i>
            </a>
        </div>
 
        <div class="menu-inner-shadow"></div>
 
-       <ul class="menu-inner py-1">
+       <ul class="py-1 menu-inner">
            <!-- Dashboard -->
            <li class="menu-item active">
                <a href="{{ route('theme') }}" class="menu-link">
@@ -368,14 +368,14 @@
                </a>
            </li> --}}
            <li class="menu-item">
-               <a href="{{ route('roles.index') }}" target="_blank" class="menu-link">
+               <a href="{{ route('roles.index') }}" class="menu-link">
                    <i class="menu-icon tf-icons bx bx-file"></i>
                    <div data-i18n="Documentation">Roles</div>
                </a>
            </li>
 
            <li class="menu-item">
-               <a href="{{ route('users.index') }}" target="_blank" class="menu-link">
+               <a href="{{ route('users.index') }}" class="menu-link">
                    <i class="menu-icon tf-icons bx bx-file"></i>
                    <div data-i18n="Documentation">Users</div>
                </a>
